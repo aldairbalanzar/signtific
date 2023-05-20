@@ -14,17 +14,14 @@ export let data: PageData;
 <Card />
 
 {:else}
-<button class="login-btn">
-   <a href="/login">Login</a>
-</button>
-<button class="register-btn">
-    <a href="/register">Register</a>
-</button>
-
+	<div class="container">
+        <button>
+            <a href="/login">Login</a>
+        </button>
+    </div>
+    <div>
+        <button>
+            <a href="/register">Register</a>
+        </button>
+    </div>
 {/if}
-  
-<style lang="postcss">
-:global(html) {
-    background-color: theme(colors.gray.300);
-}
-</style>
