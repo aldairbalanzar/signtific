@@ -14,12 +14,10 @@ export let data: PageData;
 <Card />
 
 {:else}
-	<div class="container">
+	<div class="btn-container">
         <button>
             <a href="/login">Login</a>
         </button>
-    </div>
-    <div>
         <button>
             <a href="/register">Register</a>
         </button>
