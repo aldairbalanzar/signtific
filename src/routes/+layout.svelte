@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-    import '../app.css';
+    import '../app.postcss';
 	import { invalidateAll } from '$app/navigation';
     import type { LayoutData } from './$types';
 
