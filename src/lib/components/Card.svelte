@@ -24,7 +24,7 @@
         color: aliceblue;
     }
     
-    .card-img {
+    .sign-img {
         width: 100%;
     }
     
