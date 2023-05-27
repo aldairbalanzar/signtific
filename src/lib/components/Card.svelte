@@ -1,11 +1,24 @@
 <script lang="ts">
     import '../../app.postcss';
-    import penImg from "../devAssets/pen.jpeg"
+    import penImg from "../devAssets/pen.jpeg";
+    import penVid from "../devAssets/pen.mp4";
+
+    function handlePlayVideo(value: string): void {
+        console.log(value);
+    }
+
+    const id = 'dat string'
 </script>
 
 <div class="card-container">
     <h1 class="card-title">Title</h1>
-    <img class="sign-img" src={penImg} alt={''}>
+    <button class="img-btn" on:click={() => {handlePlayVideo(id)}}>
+        <img class="sign-img" src={penImg} alt={''}>
+    </button>
+    <div class="video-container">
+        <video class="sign-vid" src={penVid}>
+        <track kind="captions">
+    </div>
     <div class="card-description">card description</div>
 </div>
 
@@ -24,8 +37,20 @@
         color: aliceblue;
     }
     
-    .sign-img {
+    .img-btn {
+        .sign-img {
+            width: 100%;
+        }
+    }
+
+    .video-container {
         width: 100%;
+        display: flex;
+
+        .sign-vid {
+            width: 100%;
+            object-fit: contain;
+        }
     }
     
     .card-description {
