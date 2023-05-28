@@ -3,28 +3,37 @@
     import penImg from "../devAssets/pen.jpeg";
     import penVid from "../devAssets/pen.mp4";
 
-    function handlePlayVideo(value: string): void {
-        console.log(value);
-    }
+    let isVideoPaused: boolean = true;
 
-    const id = 'dat string'
+    function togglePlayVideo(): void {
+        isVideoPaused = false;
+    }
 </script>
 
 <div class="card-container">
     <h1 class="card-title">Title</h1>
-    <button class="img-btn" on:click={() => {handlePlayVideo(id)}}>
-        <img class="sign-img" src={penImg} alt={''}>
+    <button on:click={togglePlayVideo}
+    class="img-btn" 
+    style="display: {isVideoPaused ? 'block' : 'none'}">
+        <img class="sign-img"
+        src={penImg}
+        alt={'pen image'}>
     </button>
+
     <div class="video-container">
-        <video class="sign-vid" src={penVid}>
+        <video bind:paused={isVideoPaused}
+        src={penVid}
+        class="sign-vid"
+        style="display: {isVideoPaused ? 'none' : 'block'}">
         <track kind="captions">
     </div>
+
     <div class="card-description">card description</div>
 </div>
 
 <style lang="postcss">
 .card-container {
-    width: 20%;
+    width: 18%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -38,18 +47,32 @@
     }
     
     .img-btn {
+        width: 100%;
+        border: none;
+        background-color: transparent;
+        display: flex;
+        justify-content: center;
+        padding: 0;
+
+
+
         .sign-img {
-            width: 100%;
+            width: 80%;
+            object-fit: cover;
+            height: 240px;
         }
     }
 
     .video-container {
         width: 100%;
         display: flex;
+        justify-content: center;
 
         .sign-vid {
-            width: 100%;
-            object-fit: contain;
+            width: 80%;
+            height: 240px;
+            object-fit: cover;
+            display: none;
         }
     }
     
