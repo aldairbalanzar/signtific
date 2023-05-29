@@ -8,8 +8,10 @@ export const handle = (async ({ event, resolve }) => {
         supabaseKey: PUBLIC_SUPABASE_ANON_KEY,
         event,
     });
+
     event.locals.getSession = async () => {
         const { data: { session }} = await event.locals.supabase.auth.getSession();
+        
         return session
     }
 

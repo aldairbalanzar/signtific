@@ -8,11 +8,6 @@ export let data: PageData;
 <main class="container">
 {#if data.session}
     <p class="greeting">welcome, { data.session.user.email }</p>
-    <form class="form" action="/logout" method="POST">
-        <div class="btn-container">
-            <button class="logout">Logout</button>
-        </div>
-    </form>
     <Card />
 
 {:else}
@@ -34,38 +29,6 @@ export let data: PageData;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    .form {
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-
-        .btn-container {
-            width: 100%;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-
-            .logout {
-                width: 10%;
-                background-color: rgb(255, 114, 85);
-                border: none;
-                border-radius: 3px;
-                padding: .5% 0;
-                color: hsl(220 20% 14%);
-                font-size: 1.6rem;
-                text-align: center;
-                text-decoration: none;
-                transition: .35s;
-            }
-            .logout:hover {
-                background-color: aliceblue;
-                color: hsl(220 20% 14%);
-                cursor: pointer;
-            }
-        }
-    }
 
     .greeting {
         width: 100%;
