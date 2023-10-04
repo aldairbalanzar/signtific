@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { onMount } from "svelte";
-  import { supabaseClient } from "$lib/supabase.js";
 	import { invalidateAll } from "$app/navigation";
 
   export let data;
-  console.log('data: ', data);
+  const { session, supabase } = data;
 
   onMount(() => {
-    const { data } = supabaseClient.auth.onAuthStateChange(() => invalidateAll());
+    const { data } = supabase.auth.onAuthStateChange(() => invalidateAll());
+    console.log('data: ', data);
     const { subscription } = data;
 
     return () => subscription.unsubscribe();
@@ -19,6 +19,10 @@
   <ul>
     <li><a href="/login">Login</a></li>
     <li><a href="/register">Register</a></li>
+    {#if session}
+    <form action="POST"></form>
+      <button type="submit">Logout</button>
+    {/if}
   </ul>
 </nav>
 
