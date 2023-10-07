@@ -7,7 +7,6 @@
 
   onMount(() => {
     const { data } = supabase.auth.onAuthStateChange(() => invalidateAll());
-    console.log('data: ', data);
     const { subscription } = data;
 
     return () => subscription.unsubscribe();
@@ -20,8 +19,9 @@
     <li><a href="/login">Login</a></li>
     <li><a href="/register">Register</a></li>
     {#if session}
-    <form action="POST"></form>
+    <form action="/logout" method="POST">
       <button type="submit">Logout</button>
+    </form>
     {/if}
   </ul>
 </nav>

@@ -3,7 +3,7 @@ import type { Actions } from "./$types";
 import { fail, redirect } from "@sveltejs/kit";
 
 export const actions: Actions = {
-  login: async ({ request, locals, url }) => {
+  login: async ({ locals, url }) => {
     const provider = url.searchParams.get('provider') as Provider;
     if(provider) {
       const { data, error: err } = await locals.supabase.auth.signInWithOAuth({ provider: provider })
