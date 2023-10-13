@@ -1,39 +1,52 @@
 <script lang="ts">
-	import type { CardSign } from "$lib/interfaces/cardInterface";
+	import type { ICardSign } from "$lib/interfaces/cardSignInterface";
 
-  export let sign: CardSign;
-  let isPlaying = false;
+  export let sign: ICardSign;
+  export let playingId: string;
   let video: HTMLVideoElement;
 
-  function handleVideoPlay() {
-    isPlaying = true;
-    video.play();
+  function videoEnded() {
+    playingId = '';
   }
 
-  function handleVideoEnd() {
-    isPlaying = false;
+  function videoPlay() {
+    playingId = sign.id;
   }
+
+	$: isPlaying = (sign.id === playingId);
+	$: if(isPlaying) video.play();
+  $: disabled = Boolean(playingId.length)
 </script>
 
-<button class="card-container" on:click={handleVideoPlay}>
+<button 
+class="card-container"
+on:click={videoPlay}
+disabled={disabled}
+>
   <h1 class="card-title">Title</h1>
   <img
   class={isPlaying ? 'hide' : 'card-img'}
   src={sign.img}
-  alt="turtle">
+  alt={sign.title}
+  >
   <video
   class={isPlaying ? 'card-video' : 'hide'}
   src={sign.video}
   bind:this={video}
-  on:ended={handleVideoEnd}
+  on:ended={videoEnded}
   >
     <track kind="captions" />
   </video>
 </button>
 
 <style>
+  button.card-container[disabled] {
+    width: 30%;
+    border: 2px solid blue !important; 
+    pointer-events: none;
+  } 
   .card-container {
-    border: 2px solid red;
+    /* border: 2px solid red; */
     width: 224px;
     display: flex;
     justify-content: center;
