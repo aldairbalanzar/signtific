@@ -24,7 +24,8 @@ on:click={videoPlay}
 disabled={disabled}
 >
   <h1 class="card-title">{sign.title}</h1>
-  <img
+  <input
+  type="image"
   class={isPlaying ? 'hide' : 'card-img'}
   src={sign.img}
   alt={sign.title}
@@ -63,7 +64,7 @@ disabled={disabled}
   .card-img {
     width: 100%;
     height: 135px;
-    object-fit: contain;
+    object-fit: cover;
     border-radius: 10%;
   }
   .card-video {
