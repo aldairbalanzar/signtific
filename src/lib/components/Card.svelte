@@ -15,7 +15,7 @@
 
 	$: isPlaying = (sign.id === playingId);
 	$: if(isPlaying) video.play();
-  $: disabled = Boolean(playingId.length)
+  $: disabled = Boolean(playingId.length && !isPlaying)
 </script>
 
 <button 
@@ -23,7 +23,7 @@ class="card-container"
 on:click={videoPlay}
 disabled={disabled}
 >
-  <h1 class="card-title">Title</h1>
+  <h1 class="card-title">{sign.title}</h1>
   <img
   class={isPlaying ? 'hide' : 'card-img'}
   src={sign.img}
@@ -41,29 +41,37 @@ disabled={disabled}
 
 <style>
   button.card-container[disabled] {
-    width: 30%;
-    border: 2px solid blue !important; 
     pointer-events: none;
   } 
   .card-container {
-    /* border: 2px solid red; */
-    width: 224px;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+    border-radius: 10%;
+    width: 155px;
+    height: 155px;
+    background-color: #ffffff00;
+    margin-top: 2%;
 
   }
+
   .card-title {
-    width: 100%;
+    font-size: .8rem;
+    color: rgb(0, 0, 0);
     text-align: center;
+    font-weight: bold;
+    width: 100%;
+    margin: 0;
   }
   .card-img {
-    width: 224px;
+    width: 100%;
+    height: 135px;
     object-fit: contain;
+    border-radius: 10%;
   }
   .card-video {
-    width: 224px;
-    object-fit: contain;
+    width: 100%;
+    height: 135px;
+    object-fit: cover;
+    border-radius: 10%;
+
   }
   .hide {
     display: none;
