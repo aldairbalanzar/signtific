@@ -21,6 +21,62 @@ let signs: ICardSign[] = [
     video: duckVideo,
     play: false,
   },
+  {
+    id: '3',
+    title: 'turtle',
+    img: turtleImg,
+    video: turtleVideo,
+    play: false,
+  },
+  {
+    id: '4',
+    title: 'duck',
+    img: duckImg,
+    video: duckVideo,
+    play: false,
+  },
+  {
+    id: '5',
+    title: 'turtle',
+    img: turtleImg,
+    video: turtleVideo,
+    play: false,
+  },
+  {
+    id: '6',
+    title: 'duck',
+    img: duckImg,
+    video: duckVideo,
+    play: false,
+  },
+  {
+    id: '7',
+    title: 'turtle',
+    img: turtleImg,
+    video: turtleVideo,
+    play: false,
+  },
+  {
+    id: '8',
+    title: 'duck',
+    img: duckImg,
+    video: duckVideo,
+    play: false,
+  },
+  {
+    id: '9',
+    title: 'turtle',
+    img: turtleImg,
+    video: turtleVideo,
+    play: false,
+  },
+  {
+    id: '10',
+    title: 'duck',
+    img: duckImg,
+    video: duckVideo,
+    play: false,
+  },
 ];
 $: playingId = '';
 </script>
@@ -36,8 +92,9 @@ $: playingId = '';
 
 <style>
   .container {
+    width: 100%;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-evenly;
     flex-wrap: wrap;
   }
 </style>
