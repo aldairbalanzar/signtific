@@ -6,6 +6,8 @@ import duckImg from "$lib/images/duckImg.jpg";
 import turtleVideo from "$lib/video/turtle.mp4";
 import duckVideo from "$lib/video/duck.mp4";
 
+
+
 let signs: ICardSign[] = [
   {
     id: '1',
@@ -16,62 +18,6 @@ let signs: ICardSign[] = [
   },
   {
     id: '2',
-    title: 'duck',
-    img: duckImg,
-    video: duckVideo,
-    play: false,
-  },
-  {
-    id: '3',
-    title: 'turtle',
-    img: turtleImg,
-    video: turtleVideo,
-    play: false,
-  },
-  {
-    id: '4',
-    title: 'duck',
-    img: duckImg,
-    video: duckVideo,
-    play: false,
-  },
-  {
-    id: '5',
-    title: 'turtle',
-    img: turtleImg,
-    video: turtleVideo,
-    play: false,
-  },
-  {
-    id: '6',
-    title: 'duck',
-    img: duckImg,
-    video: duckVideo,
-    play: false,
-  },
-  {
-    id: '7',
-    title: 'turtle',
-    img: turtleImg,
-    video: turtleVideo,
-    play: false,
-  },
-  {
-    id: '8',
-    title: 'duck',
-    img: duckImg,
-    video: duckVideo,
-    play: false,
-  },
-  {
-    id: '9',
-    title: 'turtle',
-    img: turtleImg,
-    video: turtleVideo,
-    play: false,
-  },
-  {
-    id: '10',
     title: 'duck',
     img: duckImg,
     video: duckVideo,

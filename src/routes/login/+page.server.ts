@@ -6,15 +6,13 @@ export const actions: Actions = {
   login: async ({ locals, url }) => {
     const provider = url.searchParams.get('provider') as Provider;
     if(provider) {
-      const { data, error: err } = await locals.supabase.auth.signInWithOAuth(
-        { provider: provider, options: { redirectTo: `${url.origin}/dashboard` }}
-      );
+      const { data, error: err } = await locals.supabase.auth.signInWithOAuth({ provider });
       if(err) {
         console.log('error: ', err);
-        return fail(400, {message: 'Something went wrong.'})
+        return fail(400, {message: 'Something went wrong.'});
       }
 
-      throw redirect(303, data.url)
+      throw redirect(303, data.url);
     }
   }
 };
