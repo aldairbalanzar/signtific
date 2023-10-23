@@ -16,8 +16,10 @@
 
 <nav class="navbar">
   <ul class="links-container">
+    {#if !session}
     <li class="link"><a href="/login">Login</a></li>
     <li class="link"><a href="/register">Register</a></li>
+    {/if}
     {#if session}
     <form action="/logout" method="POST">
       <button class="logout-btn" type="submit">Logout</button>
