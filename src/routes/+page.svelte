@@ -1,10 +1,8 @@
-<h1>Signtific</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script lang="ts">
+import {page} from '$app/stores'
+import { goto } from '$app/navigation';
+	import { browser } from '$app/environment';
+export let data;
 
-<style>
-  :global(body) {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-  }
-</style>
+$: if(browser && data.session) goto(`${$page.url.origin}/dashboard`);
+</script>
