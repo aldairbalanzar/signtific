@@ -21,6 +21,10 @@
     <li class="link"><a href="/register">Register</a></li>
     {/if}
     {#if session}
+    <li class="link"><a href="/dashboard">Dashboard</a></li>
+      {#if session?.user.role === 'admin'}
+      <li class="link"><a href="/admin">Admin</a></li>
+      {/if}
     <form action="/logout" method="POST">
       <button class="logout-btn" type="submit">Logout</button>
     </form>
