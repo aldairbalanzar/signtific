@@ -4,5 +4,5 @@ import { goto } from '$app/navigation';
 import { browser } from '$app/environment';
 export let data;
 
-$: if(browser && data.session) goto(`${$page.url.origin}/protected/dashboard`);
+$: if(browser && data.session) goto(`${$page.url.origin}/dashboard`);
 </script>
