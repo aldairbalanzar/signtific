@@ -14,6 +14,7 @@ declare global {
 			user: IUser,
 		}
 		// interface Platform {}
+		// interface Platform {}
 	}
 }
 
