@@ -1,10 +1,14 @@
 <script lang="ts">
 	import { onMount } from "svelte";
 	import { invalidateAll } from "$app/navigation";
+	import type { LayoutData } from "./$types";
+	import type { IUser } from "$lib/interfaces/user";
 
-  export let data;
-  const { session, supabase } = data;
-
+  export let data: LayoutData;
+  let { session, supabase } = data;
+  let user: IUser;
+  $: user = data.user;
+  
   onMount(() => {
     const { data } = supabase.auth.onAuthStateChange(() => invalidateAll());
     const { subscription } = data;
@@ -13,7 +17,6 @@
   })
 
 </script>
-
 <nav class="navbar">
   <ul class="links-container">
     {#if !session}
@@ -22,7 +25,7 @@
     {/if}
     {#if session}
     <li class="link"><a href="/dashboard">Dashboard</a></li>
-      {#if session?.user.role === 'admin'}
+      {#if user?.is_admin}
       <li class="link"><a href="/admin">Admin</a></li>
       {/if}
     <form action="/logout" method="POST">

@@ -9,7 +9,16 @@ export const load = async ({ data, fetch, depends }) => {
     event: {fetch},
     serverSession: data.session
   });
-  const {data: { session }} = await supabase.auth.getSession();
 
-  return { session, supabase, }
+  async function fetchSession() {
+    const { data: { session }} = await supabase.auth.getSession();
+
+    return session
+  }
+
+  return { 
+    session: fetchSession(),
+    user: data.user,
+    supabase
+  }
 };
