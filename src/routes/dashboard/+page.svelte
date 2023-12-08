@@ -1,6 +1,6 @@
 <script lang="ts">
 import Card from "$lib/components/Card.svelte";
-import type { ICardSign } from "$lib/interfaces/cardSignInterface";
+import type { ICardSign } from "$lib/interfaces/cardSign";
 import turtleImg from "$lib/images/turtleImg.jpg";
 import duckImg from "$lib/images/duckImg.jpg";
 import turtleVideo from "$lib/video/turtle.mp4";
