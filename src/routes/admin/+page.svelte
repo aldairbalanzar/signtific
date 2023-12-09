@@ -19,7 +19,12 @@ async function handleFileUpload() {
 }
 </script>
 
-<div>
+<ul class="admin-links-container">
+    <li class="admin-link"><a href="/admin/sign/create">Create Sign</a></li>
+    <li class="admin-link"><a href="/admin/sign/manage">Manage Signs</a></li>
+</ul>
+
+<!-- <div>
     <form method="POST">
         <label for="file-upload"></label>
         <input
@@ -32,4 +37,4 @@ async function handleFileUpload() {
 
         <button on:click|preventDefault={handleFileUpload}>Upload</button>
     </form>
-</div>
+</div> -->

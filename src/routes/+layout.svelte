@@ -33,6 +33,10 @@
     </form>
     {/if}
   </ul>
+
+  {#if user}
+    <div>{ user.raw_user_meta_data.full_name }</div>
+  {/if}
 </nav>
 
 <slot/>
