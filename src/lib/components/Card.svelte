@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ICardSign } from "$lib/interfaces/cardSignInterface";
+	import type { ICardSign } from "$lib/interfaces/cardSign";
 
   export let sign: ICardSign;
   export let playingId: string;
