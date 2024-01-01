@@ -9,6 +9,8 @@ export interface ISignUploadPayload {
 export interface ISignUpload {
   name: string;
   image_url: string | null;
-  video_url: string | null;
-  audio_url: string | null;
+  video_bucket: string | null;
+  audio_bucket: string | null;
+  video_file_name: string | null;
+  audio_file_name: string | null;
 }

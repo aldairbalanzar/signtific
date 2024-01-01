@@ -7,6 +7,8 @@ import turtleVideo from "$lib/video/turtle.mp4";
 import duckVideo from "$lib/video/duck.mp4";
 
 export let data;
+const { signs } = data;
+console.log('signs: ', data.signs);
 
 // let signs: ICardSign[] = [
 //   {
@@ -25,18 +27,18 @@ export let data;
 //   },
 // ];
 
-const signs = data.supabase.storage.from('sign_images').getPublicUrl
-
 $: playingId = '';
 </script>
 
 <main class="container">
-<!-- {#each signs as sign}
-  <Card
-  {sign}
-  bind:playingId={playingId}
-  />
-{/each} -->
+{#if signs?.length}
+  {#each signs as sign}
+    <Card
+    {sign}
+    bind:playingId={playingId}
+    />
+  {/each}
+{/if}
 </main>
 
 <style>

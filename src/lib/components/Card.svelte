@@ -23,21 +23,21 @@ class="card-container"
 on:click={videoPlay}
 disabled={disabled}
 >
-  <h1 class="card-title">{sign.title}</h1>
+  <h1 class="card-title">{sign.name}</h1>
   <input
   type="image"
   class={isPlaying ? 'hide' : 'card-img'}
-  src={sign.img}
-  alt={sign.title}
+  src={sign.image_url}
+  alt={sign.name}
   >
-  <video
+  <!-- <video
   class={isPlaying ? 'card-video' : 'hide'}
   src={sign.video}
   bind:this={video}
   on:ended={videoEnded}
   >
     <track kind="captions" />
-  </video>
+  </video> -->
 </button>
 
 <style>
