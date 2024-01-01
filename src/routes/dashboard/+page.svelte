@@ -1,31 +1,7 @@
 <script lang="ts">
 import Card from "$lib/components/Card.svelte";
-import type { ICardSign } from "$lib/interfaces/cardSign";
-import turtleImg from "$lib/images/turtleImg.jpg";
-import duckImg from "$lib/images/duckImg.jpg";
-import turtleVideo from "$lib/video/turtle.mp4";
-import duckVideo from "$lib/video/duck.mp4";
-
 export let data;
-const { signs } = data;
-console.log('signs: ', data.signs);
-
-// let signs: ICardSign[] = [
-//   {
-//     id: '1',
-//     title: 'turtle',
-//     img: turtleImg,
-//     video: turtleVideo,
-//     play: false,
-//   },
-//   {
-//     id: '2',
-//     title: 'duck',
-//     img: duckImg,
-//     video: duckVideo,
-//     play: false,
-//   },
-// ];
+const { signs, supabase } = data;
 
 $: playingId = '';
 </script>
@@ -35,6 +11,7 @@ $: playingId = '';
   {#each signs as sign}
     <Card
     {sign}
+    {supabase}
     bind:playingId={playingId}
     />
   {/each}
