@@ -32,8 +32,10 @@ const { supabase } = data;
         let newSign: ISignUpload = {
             name: '',
             image_url: '',
-            video_url: '',
-            audio_url: '',
+            video_bucket: '',
+            audio_bucket: '',
+            video_file_name: '',
+            audio_file_name: '',
         }
 
         const { name, image, video, audio, audioLang } = newSignPayload;
@@ -56,23 +58,19 @@ const { supabase } = data;
 
                 switch(bucket) {
                     case 'sign_images':
-                        newSign.image_url = `${bucket}/${fileName}`;
+                        newSign.image_url = `https://txyxoufkveznvharvjvu.supabase.co/storage/v1/object/public/sign_images/${fileName}`;
                     case 'sign_videos':
-                        newSign.video_url = `${bucket}/${fileName}`;
+                        newSign.video_bucket = bucket;
+                        newSign.video_file_name = fileName;
                     case 'sign_audio':
-                        newSign.audio_url = `${bucket}/${fileName}`;
+                        newSign.audio_bucket = bucket;
+                        newSign.audio_file_name = fileName;
                 }
             }
         }
 
         try {
-            console.log('new sign: ', newSign);
-            const { data, error } = await supabase.from('american_signs').insert({
-                name: newSign.name,
-                image_url: newSign.image_url,
-                video_url: newSign.video_url,
-                audio_url: newSign.audio_url,
-            });
+            const { data, error } = await supabase.from('american_signs').insert(newSign).select('*')
             if(error) console.log('supabase-error: ', error);
             console.log('data: ', data);
         } catch (error) {

@@ -1,43 +1,70 @@
 <script lang="ts">
 	import type { ICardSign } from "$lib/interfaces/cardSign";
+	import type { SupabaseClient } from "@supabase/supabase-js";
 
   export let sign: ICardSign;
   export let playingId: string;
+  export let supabase: SupabaseClient;
   let video: HTMLVideoElement;
+  let audio: HTMLAudioElement;
 
-  function videoEnded() {
+  async function fetchVideoAndAudio() {
+    const videoRes = await supabase.storage
+    .from(sign.video_bucket).createSignedUrl(sign.video_file_name, 60);
+
+    const audioRes = await supabase.storage
+    .from(sign.audio_bucket).createSignedUrl(sign.audio_file_name, 60);
+
+    currentVideoSrc = videoRes.data?.signedUrl ?? '';
+    currentAudioSrc = audioRes.data?.signedUrl ?? '';
+  }
+
+  function signEnded() {
     playingId = '';
   }
 
-  function videoPlay() {
+  async function signPlay() {
+    await fetchVideoAndAudio();
     playingId = sign.id;
   }
 
 	$: isPlaying = (sign.id === playingId);
-	$: if(isPlaying) video.play();
-  $: disabled = Boolean(playingId.length && !isPlaying)
+	$: if(isPlaying){
+    video.play();
+    audio.play();
+  }
+  $: disabled = Boolean(playingId.length && !isPlaying);
+  $: currentVideoSrc = '';
+  $: currentAudioSrc = '';
 </script>
 
 <button 
 class="card-container"
-on:click={videoPlay}
+on:click={signPlay}
+data-sveltekit-preload-data
 disabled={disabled}
 >
-  <h1 class="card-title">{sign.title}</h1>
+  <h1 class="card-title">{sign.name}</h1>
   <input
   type="image"
   class={isPlaying ? 'hide' : 'card-img'}
-  src={sign.img}
-  alt={sign.title}
+  src={sign.image_url}
+  alt={sign.name}
   >
   <video
+  muted
   class={isPlaying ? 'card-video' : 'hide'}
-  src={sign.video}
+  src={currentVideoSrc}
   bind:this={video}
-  on:ended={videoEnded}
+  on:ended={signEnded}
   >
     <track kind="captions" />
   </video>
+  <audio 
+  src={currentAudioSrc}
+  bind:this={audio}
+  >
+  </audio>
 </button>
 
 <style>
