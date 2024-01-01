@@ -33,7 +33,7 @@
     video.play();
     audio.play();
   }
-  $: disabled = Boolean(playingId.length && !isPlaying);
+  $: disabled = Boolean(playingId.length);
   $: currentVideoSrc = '';
   $: currentAudioSrc = '';
 </script>
