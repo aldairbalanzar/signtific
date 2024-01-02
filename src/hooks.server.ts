@@ -19,8 +19,8 @@ export const handle: Handle = async ({ event, resolve }) => {
   const {data: { session }} = await event.locals.supabase.auth.getSession();
   event.locals.session = session
 
-  if(event.url.pathname.startsWith('/protected')) {
-    if(!event.locals.session) {
+  if(event.url.pathname.startsWith('/admin')) {
+    if(!event.locals.session || event.locals.user?.role !== 'admin') {
       throw redirect(303, '/');
     }
   }
