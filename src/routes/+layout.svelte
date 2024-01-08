@@ -6,7 +6,7 @@
 
   export let data: LayoutData;
   let { session, supabase } = data;
-  let user: IUser;
+  let user: IUser | null;
   $: user = data.user;
   
   onMount(() => {
