@@ -7,7 +7,7 @@ export const authGuards: Handle = async ({ event, resolve }) => {
     if(isAdminPage) {
       if(!session || !user?.is_admin) {
         console.log(`${user?.id} you are not allowed`);
-        throw redirect(303, '/');
+        redirect(303, '/');
       }
     }
 

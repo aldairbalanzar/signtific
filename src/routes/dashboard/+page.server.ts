@@ -8,6 +8,6 @@ export const load = async ({ locals }) => {
     }
 
     return {
-        signs: fetchSigns(),
+        signs: await fetchSigns(),
     }
 };

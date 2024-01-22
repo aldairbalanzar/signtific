@@ -22,7 +22,7 @@ export const load = async ({ data, fetch, depends }) => {
   }
 
   return { 
-    session: fetchSession(),
+    session: await fetchSession(),
     user: data.user,
     supabase
   }

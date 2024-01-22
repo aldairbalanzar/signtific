@@ -12,7 +12,7 @@ export const actions: Actions = {
         return fail(400, {message: 'Something went wrong.'});
       }
 
-      throw redirect(303, data.url);
+      redirect(303, data.url);
     }
   }
 };
