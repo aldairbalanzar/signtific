@@ -1,20 +1,21 @@
 <script lang="ts">
-	import { onMount } from "svelte";
-	import { invalidateAll } from "$app/navigation";
-	import type { LayoutData } from "./$types";
-	import type { IUser } from "$lib/interfaces/user";
+	import "../app.pcss";
+    import { onMount } from "svelte";
+    import { invalidateAll } from "$app/navigation";
+    import type { LayoutData } from "./$types";
+    import type { IUser } from "$lib/interfaces/user";
 
-  export let data: LayoutData;
-  let { session, supabase } = data;
-  let user: IUser | null;
-  $: user = data.user;
-  
-  onMount(() => {
-    const { data } = supabase.auth.onAuthStateChange(() => invalidateAll());
-    const { subscription } = data;
+    export let data: LayoutData;
+    let { session, supabase } = data;
+    let user: IUser | null;
+    $: user = data.user;
 
-    return () => subscription.unsubscribe();
-  })
+    onMount(() => {
+      const { data } = supabase.auth.onAuthStateChange(() => invalidateAll());
+      const { subscription } = data;
+
+      return () => subscription.unsubscribe();
+    })
 
 </script>
 <nav class="navbar">
@@ -39,42 +40,42 @@
   {/if}
 </nav>
 
-<slot/>
+<slot></slot>
 
 <style>
-  :global(body) {
-    background-color: lightgrey;
-  }
-  .navbar {
-    display: flex;
-    width: 100%;
-    background-color: lightslategrey;
-  }
+  /*:global(body) {*/
+  /*  background-color: lightgrey;*/
+  /*}*/
+  /*.navbar {*/
+  /*  display: flex;*/
+  /*  width: 100%;*/
+  /*  background-color: lightslategrey;*/
+  /*}*/
 
-  .links-container{
-    width: 100%;
-    display: flex;
-    justify-content: space-evenly;
-  }
+  /*.links-container{*/
+  /*  width: 100%;*/
+  /*  display: flex;*/
+  /*  justify-content: space-evenly;*/
+  /*}*/
 
-  .links-container>.link {
-    width: 30%;
-    list-style: none;
-  }
-  .links-container>.link>a {
-    text-decoration: none;
-    color: black;
-  }
-  :hover.links-container>.link>a {
-    cursor: pointer;
-  }
+  /*.links-container>.link {*/
+  /*  width: 30%;*/
+  /*  list-style: none;*/
+  /*}*/
+  /*.links-container>.link>a {*/
+  /*  text-decoration: none;*/
+  /*  color: black;*/
+  /*}*/
+  /*:hover.links-container>.link>a {*/
+  /*  cursor: pointer;*/
+  /*}*/
 
-  form>.logout-btn {
-    border: none;
-    background-color: #ffffff00;
-  }
-  :hover form>.logout-btn {
-    cursor: pointer;
+  /*form>.logout-btn {*/
+  /*  border: none;*/
+  /*  background-color: #ffffff00;*/
+  /*}*/
+  /*:hover form>.logout-btn {*/
+  /*  cursor: pointer;*/
 
-  }
+  /*}*/
 </style>
