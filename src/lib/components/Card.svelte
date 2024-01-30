@@ -28,6 +28,8 @@
     playingId = sign.id;
   }
 
+  const cardMedia: string = 'w-48 h-48 object-cover p-2 rounded-b-2xl';
+
 	$: isPlaying = (sign.id === playingId);
 	$: if(isPlaying){
     video.play();
@@ -39,69 +41,32 @@
 </script>
 
 <button 
-class="card-container"
+class="card rounded-2xl variant-outline-secondary"
 on:click={signPlay}
 data-sveltekit-preload-data
 disabled={disabled}
 >
-  <h1 class="card-title">{sign.name}</h1>
-  <input
-  type="image"
-  class={isPlaying ? 'hide' : 'card-img'}
+  <h1 class="card-header text-lg font-sans">{sign.name}</h1>
+
+  <img
+  class={isPlaying ? 'hidden' : cardMedia}
   src={sign.image_url}
   alt={sign.name}
   >
+
   <video
   muted
-  class={isPlaying ? 'card-video' : 'hide'}
+  class={isPlaying ? cardMedia : 'hidden'}
   src={currentVideoSrc}
   bind:this={video}
   on:ended={signEnded}
   >
     <track kind="captions" />
   </video>
+
   <audio 
   src={currentAudioSrc}
   bind:this={audio}
   >
   </audio>
 </button>
-
-<style>
-  button.card-container[disabled] {
-    pointer-events: none;
-  } 
-  .card-container {
-    border-radius: 10%;
-    width: 155px;
-    height: 155px;
-    background-color: #ffffff00;
-    margin-top: 2%;
-
-  }
-
-  .card-title {
-    font-size: .8rem;
-    color: rgb(0, 0, 0);
-    text-align: center;
-    font-weight: bold;
-    width: 100%;
-    margin: 0;
-  }
-  .card-img {
-    width: 100%;
-    height: 135px;
-    object-fit: cover;
-    border-radius: 10%;
-  }
-  .card-video {
-    width: 100%;
-    height: 135px;
-    object-fit: cover;
-    border-radius: 10%;
-
-  }
-  .hide {
-    display: none;
-  }
-</style>

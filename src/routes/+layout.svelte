@@ -27,7 +27,7 @@
 					<div class="w-48 flex justify-between">
 						<Avatar src={user.raw_user_meta_data.avatar_url}/>
 						<div class="flex flex-col justify-center">
-							<p>{user.raw_user_meta_data.full_name}</p>
+							<p class="font-sans">{user.raw_user_meta_data.full_name}</p>
 						</div>
 					</div>
 				{/if}
@@ -36,19 +36,19 @@
 			<svelte:fragment slot="trail">
 				<ul class="min-w-96 flex justify-between pr-10">
 					{#if !session}
-						<li class="w-1/4"><a href="/login">Login</a></li>
-						<li class="w-1/4"><a href="/register">Register</a></li>
+						<li class="w-1/4 font-sans"><a href="/login">Login</a></li>
+						<li class="w-1/4 font-sans"><a href="/register">Register</a></li>
 					{/if}
 
 					{#if session}
-						<li class=""><a href="/dashboard">Dashboard</a></li>
+						<li class="font-sans"><a href="/dashboard">Dashboard</a></li>
 
 						{#if user?.is_admin}
-							<li class=""><a href="/admin">Admin</a></li>
+							<li class="font-sans"><a href="/admin">Admin</a></li>
 						{/if}
 
 						<form action="/logout" method="POST">
-							<button class="logout-btn" type="submit">Logout</button>
+							<button class="font-sans" type="submit">Logout</button>
 						</form>
 					{/if}
 					

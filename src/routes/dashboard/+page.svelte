@@ -6,7 +6,7 @@ const { signs, supabase } = data;
 $: playingId = '';
 </script>
 
-<main class="container">
+<main class="w-full flex justify-evenly flex-wrap pt-6">
 {#if signs?.length}
   {#each signs as sign}
     <Card
@@ -17,12 +17,3 @@ $: playingId = '';
   {/each}
 {/if}
 </main>
-
-<style>
-  .container {
-    width: 100%;
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-  }
-</style>
