@@ -44,8 +44,8 @@ const { supabase } = data;
 
         for(const [key, val] of Object.entries(newSignPayload)) {
             if(keysOfFiles.includes(key)) {
-                const file = val[0];
-                const fileExt: string = file.name.split('.').pop();
+                const file: File = val[0];
+                const fileExt: string = file.name.split('.').pop() ?? '';
                 const fileName: string = `${Math.random()}.${fileExt.toLowerCase()}`;
                 const bucket = getBucket(fileExt);
 
@@ -70,39 +70,39 @@ const { supabase } = data;
         }
 
         try {
-            const { data, error } = await supabase.from('american_signs').insert(newSign).select('*')
+            const { data, error } = await supabase.from('american_signs').insert(newSign).select('*');
             if(error) console.log('supabase-error: ', error);
+
             console.log('data: ', data);
         } catch (error) {
             console.log('error: ', error);
         }
-
     }
   </script>
   
-  <div>
-    <h3>Create New Sign</h3>
-    <form method="POST">
-        <div class="input-field">
-            <label for="sign-name">Name: </label>
-            <input type="text" required bind:value={newSignPayload.name}>
+  <div class="w-full flex flex-wrap justify-around pt-10">
+    <h3 class="w-full text-center font-sans">Create New Sign</h3>
+    <form method="POST" class="w-1/3 flex justify-center flex-wrap">
+        <div class="input-field flex w-full pt-3 font-sans">
+            <label for="sign-name" class="w-1/3">Name: </label>
+            <input type="text" required bind:value={newSignPayload.name} class="w-2/3 font-sans">
         </div>
 
-        <div class="input-field">
-            <label for="sign-img">Image: </label>
-            <input type="file" required bind:files={newSignPayload.image}>
+        <div class="input-field flex w-full pt-3">
+            <label for="sign-img" class="w-1/3 font-sans">Image: </label>
+            <input type="file" required bind:files={newSignPayload.image} class="w-2/3 font-sans">
         </div>
 
-        <div class="input-field">
-            <label for="sign-video">Video: </label>
-            <input type="file" required bind:files={newSignPayload.video}>
+        <div class="input-field flex w-full pt-3">
+            <label for="sign-video" class="w-1/3 font-sans">Video: </label>
+            <input type="file" required bind:files={newSignPayload.video} class="w-2/3 font-sans">
         </div>
 
-        <div class="input-field">
-            <label for="sign-audio">Audio: </label>
-            <input type="file" required bind:files={newSignPayload.audio}>
+        <div class="input-field flex w-full pt-3">
+            <label for="sign-audio" class="w-1/3 font-sans">Audio: </label>
+            <input type="file" required bind:files={newSignPayload.audio} class="w-2/3 font-sans">
         </div>
 
-        <button on:click|preventDefault={handleFileUpload}>Upload</button>
+        <button on:click|preventDefault={handleFileUpload} class="btn font-sans variant-ghost mt-6">Upload</button>
     </form>
   </div>
