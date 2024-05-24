@@ -81,26 +81,26 @@ const { supabase } = data;
   </script>
   
   <div class="w-full flex flex-wrap justify-around pt-10">
-    <h3 class="w-full text-center">Create New Sign</h3>
+    <h3 class="w-full text-center font-sans">Create New Sign</h3>
     <form method="POST" class="w-1/3 flex justify-center flex-wrap">
-        <div class="input-field flex w-full pt-3">
+        <div class="input-field flex w-full pt-3 font-sans">
             <label for="sign-name" class="w-1/3">Name: </label>
-            <input type="text" required bind:value={newSignPayload.name} class="w-2/3">
+            <input type="text" required bind:value={newSignPayload.name} class="w-2/3 font-sans">
         </div>
 
         <div class="input-field flex w-full pt-3">
-            <label for="sign-img" class="w-1/3 ">Image: </label>
-            <input type="file" required bind:files={newSignPayload.image} class="w-2/3">
+            <label for="sign-img" class="w-1/3 font-sans">Image: </label>
+            <input type="file" required bind:files={newSignPayload.image} class="w-2/3 font-sans">
         </div>
 
         <div class="input-field flex w-full pt-3">
-            <label for="sign-video" class="w-1/3">Video: </label>
-            <input type="file" required bind:files={newSignPayload.video} class="w-2/3">
+            <label for="sign-video" class="w-1/3 font-sans">Video: </label>
+            <input type="file" required bind:files={newSignPayload.video} class="w-2/3 font-sans">
         </div>
 
         <div class="input-field flex w-full pt-3">
-            <label for="sign-audio" class="w-1/3">Audio: </label>
-            <input type="file" required bind:files={newSignPayload.audio} class="w-2/3">
+            <label for="sign-audio" class="w-1/3 font-sans">Audio: </label>
+            <input type="file" required bind:files={newSignPayload.audio} class="w-2/3 font-sans">
         </div>
 
         <button on:click|preventDefault={handleFileUpload} class="btn font-sans variant-ghost mt-6">Upload</button>
