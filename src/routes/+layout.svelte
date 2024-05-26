@@ -4,10 +4,17 @@
 	import { invalidateAll } from '$app/navigation';
 	import type { LayoutData } from './$types';
 	import type { IUser } from '$lib/interfaces/user';
-	import { initializeStores, AppShell, AppBar, LightSwitch, Avatar, Toast } from '@skeletonlabs/skeleton';
-	
+	import {
+		initializeStores,
+		AppShell,
+		AppBar,
+		LightSwitch,
+		Avatar,
+		Toast
+	} from '@skeletonlabs/skeleton';
+
 	export let data: LayoutData;
-	
+
 	initializeStores();
 	let { session, supabase } = data;
 	let user: IUser | null;
@@ -27,8 +34,8 @@
 		<AppBar gridColumns="grid-cols-[auto_1fr_auto]">
 			<svelte:fragment slot="lead">
 				{#if user}
-					<div class="w-48 flex justify-between">
-						<Avatar src={user.raw_user_meta_data.avatar_url}/>
+					<div class="flex w-48 justify-between">
+						<Avatar src={user.raw_user_meta_data.avatar_url} />
 						<div class="flex flex-col justify-center">
 							<p class="font-sans">{user.raw_user_meta_data.full_name}</p>
 						</div>
@@ -37,7 +44,7 @@
 			</svelte:fragment>
 
 			<svelte:fragment slot="trail">
-				<ul class="min-w-96 flex justify-between pr-10">
+				<ul class="flex min-w-96 justify-between pr-10">
 					{#if !session}
 						<li class="w-1/4 font-sans"><a href="/login">Login</a></li>
 						<li class="w-1/4 font-sans"><a href="/register">Register</a></li>
@@ -54,7 +61,7 @@
 							<button class="font-sans" type="submit">Logout</button>
 						</form>
 					{/if}
-					
+
 					<LightSwitch />
 				</ul>
 			</svelte:fragment>

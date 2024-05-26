@@ -1,19 +1,15 @@
 <script lang="ts">
-import Card from "$lib/components/Card.svelte";
-export let data;
-const { signs, supabase } = data;
+	import Card from '$lib/components/Card.svelte';
+	export let data;
+	const { signs, supabase } = data;
 
-$: playingId = '';
+	$: playingId = '';
 </script>
 
-<main class="w-full flex justify-evenly flex-wrap pt-6">
-{#if signs?.length}
-  {#each signs as sign}
-    <Card
-    {sign}
-    {supabase}
-    bind:playingId={playingId}
-    />
-  {/each}
-{/if}
+<main class="flex w-full flex-wrap justify-evenly pt-6">
+	{#if signs?.length}
+		{#each signs as sign}
+			<Card {sign} {supabase} bind:playingId />
+		{/each}
+	{/if}
 </main>
