@@ -46,6 +46,7 @@
 	"dependencies": {
 		"@supabase/ssr": "^0.0.10",
 		"@supabase/supabase-js": "^2.37.0",
+		"svelte-loading-spinners": "^0.3.6",
 		"uuid": "^9.0.1"
 	}
 }

@@ -4,9 +4,11 @@
 	import { invalidateAll } from '$app/navigation';
 	import type { LayoutData } from './$types';
 	import type { IUser } from '$lib/interfaces/user';
-	import { AppShell, AppBar, LightSwitch, Avatar } from '@skeletonlabs/skeleton';
-
+	import { initializeStores, AppShell, AppBar, LightSwitch, Avatar, Toast } from '@skeletonlabs/skeleton';
+	
 	export let data: LayoutData;
+	
+	initializeStores();
 	let { session, supabase } = data;
 	let user: IUser | null;
 	$: user = data.user;
@@ -19,6 +21,7 @@
 	});
 </script>
 
+<Toast />
 <AppShell>
 	<svelte:fragment slot="header">
 		<AppBar gridColumns="grid-cols-[auto_1fr_auto]">

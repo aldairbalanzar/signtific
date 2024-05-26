@@ -1,8 +1,13 @@
 <script lang="ts">
 import type { ISignUploadPayload, ISignUpload } from '$lib/interfaces/signUpload.js';
 export let data;
+import { getToastStore, type ToastSettings } from '@skeletonlabs/skeleton';
+	import { BarLoader } from 'svelte-loading-spinners';
+
+const toastStore = getToastStore();
 const { supabase } = data;
 
+    $: isCreating = false;
     let newSignPayload: ISignUploadPayload = {
         name: '',
         image: null,
@@ -29,6 +34,7 @@ const { supabase } = data;
     }
 
     async function handleFileUpload() {
+        isCreating = true;
         let newSign: ISignUpload = {
             name: '',
             image_url: '',
@@ -71,21 +77,54 @@ const { supabase } = data;
 
         try {
             const { data, error } = await supabase.from('american_signs').insert(newSign).select('*');
-            if(error) console.log('supabase-error: ', error);
 
-            console.log('data: ', data);
+            let toast: ToastSettings;
+            if(data) {
+                console.log('data: ', data);
+                toast = {
+                    message: 'successfully created new sign!',
+                    timeout: 5000,
+                    background: 'variant-filled-success',
+                    classes: 'font-sans',
+                };
+
+                isCreating = false;
+                clearInputs();
+            } else {
+                toast = {
+                    message: 'something went wrong when creating the new sign...',
+                    timeout: 5000,
+                    background: 'variant-filled-primary',
+                    classes: 'font-sans',
+                };
+
+                isCreating = false;
+                console.log('supabase-error: ', error)
+            }
+
+            toastStore.trigger(toast);
         } catch (error) {
             console.log('error: ', error);
         }
     }
+
+   function clearInputs(): void {
+        newSignPayload = {
+            name: '',
+            image: null,
+            video: null,
+            audio: null,
+            audioLang: 'eng',
+        };
+    }
   </script>
   
   <div class="w-full flex flex-wrap justify-around pt-10">
-    <h3 class="w-full text-center font-sans">Create New Sign</h3>
+    <h3 class="w-full text-center font-sans text-2xl pb-2">Create New Sign</h3>
     <form method="POST" class="w-1/3 flex justify-center flex-wrap">
         <div class="input-field flex w-full pt-3 font-sans">
             <label for="sign-name" class="w-1/3">Name: </label>
-            <input type="text" required bind:value={newSignPayload.name} class="w-2/3 font-sans">
+            <input type="text" required bind:value={newSignPayload.name} class="w-2/3 font-sans text-black outline-none p-1 rounded-sm">
         </div>
 
         <div class="input-field flex w-full pt-3">
@@ -104,5 +143,12 @@ const { supabase } = data;
         </div>
 
         <button on:click|preventDefault={handleFileUpload} class="btn font-sans variant-ghost mt-6">Upload</button>
+        
+        {#if isCreating} 
+        <div class="w-full pt-10 flex flex-wrap justify-around">
+            <BarLoader color="rgb(70 133 175)"/>
+            <p class="font-sans w-full text-center pt-2 pb-2">creating new sign...</p>
+        </div>
+        {/if}
     </form>
   </div>
