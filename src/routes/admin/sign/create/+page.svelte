@@ -124,7 +124,7 @@ const { supabase } = data;
     <form method="POST" class="w-1/3 flex justify-center flex-wrap">
         <div class="input-field flex w-full pt-3 font-sans">
             <label for="sign-name" class="w-1/3">Name: </label>
-            <input type="text" required bind:value={newSignPayload.name} class="w-2/3 font-sans text-black">
+            <input type="text" required bind:value={newSignPayload.name} class="w-2/3 font-sans text-black outline-none p-1 rounded-sm">
         </div>
 
         <div class="input-field flex w-full pt-3">
@@ -146,7 +146,7 @@ const { supabase } = data;
         
         {#if isCreating} 
         <div class="w-full pt-10 flex flex-wrap justify-around">
-            <BarLoader />
+            <BarLoader color="rgb(70 133 175)"/>
             <p class="font-sans w-full text-center pt-2 pb-2">creating new sign...</p>
         </div>
         {/if}
