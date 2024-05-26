@@ -3,6 +3,6 @@ export const load = async ({ locals }) => {
 
 	return {
 		session,
-		user,
+		user
 	};
 };

@@ -5,35 +5,42 @@ import type { Handle } from '@sveltejs/kit';
 import type { CookieSerializeOptions } from 'cookie';
 
 export const supabase: Handle = async ({ event, resolve }) => {
-  event.locals.supabase = createServerClient(PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY, {
-    cookies: {
-      get: (key) => event.cookies.get(key),
-      set: (key, value, options) => {event.cookies.set(key, value, options as CookieSerializeOptions & { path: string })},
-      remove: (key, options) => {event.cookies.delete(key, options as CookieSerializeOptions & { path: string })},
-    },
-  });
+	event.locals.supabase = createServerClient(PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY, {
+		cookies: {
+			get: (key) => event.cookies.get(key),
+			set: (key, value, options) => {
+				event.cookies.set(key, value, options as CookieSerializeOptions & { path: string });
+			},
+			remove: (key, options) => {
+				event.cookies.delete(key, options as CookieSerializeOptions & { path: string });
+			}
+		}
+	});
 
-  const {data: { session }} = await event.locals.supabase.auth.getSession();
-  event.locals.session = session
+	const {
+		data: { session }
+	} = await event.locals.supabase.auth.getSession();
+	event.locals.session = session;
 
-  async function fetchUserData(): Promise<IUser> {
-    const { data, error } = await event.locals.supabase.from('users')
-    .select('*')
-    .eq('id', session?.user.id)
-    .single();
-    
-    if(error) console.log('error-fetchUserData: ', error);
+	async function fetchUserData(): Promise<IUser> {
+		const { data, error } = await event.locals.supabase
+			.from('users')
+			.select('*')
+			.eq('id', session?.user.id)
+			.single();
 
-    return data;
-  }
+		if (error) console.log('error-fetchUserData: ', error);
 
-  if(event.locals.session) {
-    event.locals.user = await fetchUserData();
-  }
+		return data;
+	}
 
-  return resolve(event, {
-    filterSerializedResponseHeaders(name) {
-      return name === 'content-range'
-    },
-  });
+	if (event.locals.session) {
+		event.locals.user = await fetchUserData();
+	}
+
+	return resolve(event, {
+		filterSerializedResponseHeaders(name) {
+			return name === 'content-range';
+		}
+	});
 };
