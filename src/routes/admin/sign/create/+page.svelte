@@ -116,41 +116,66 @@
 			audio: null,
 			audioLang: 'eng'
 		};
+
+		keysOfFiles.forEach((key) => {
+			const input = document.querySelector(`.form-control[name='${key}']`) as HTMLInputElement;
+			input.value = '';
+		});
 	}
 </script>
 
 <div class="flex w-full flex-wrap justify-around pt-10">
 	<h3 class="w-full pb-2 text-center font-sans text-2xl">Create New Sign</h3>
-	<form method="POST" class="flex w-1/3 flex-wrap justify-center">
+	<form
+		on:submit|preventDefault={handleFileUpload}
+		method="POST"
+		class="flex w-1/3 flex-wrap justify-center"
+	>
 		<div class="input-field flex w-full pt-3 font-sans">
 			<label for="sign-name" class="w-1/3">Name: </label>
 			<input
 				type="text"
 				required
+				name="name"
 				bind:value={newSignPayload.name}
-				class="w-2/3 rounded-sm p-1 font-sans text-black outline-none"
+				class="form-control w-2/3 rounded-sm p-1 font-sans text-black outline-none"
 			/>
 		</div>
 
 		<div class="input-field flex w-full pt-3">
 			<label for="sign-img" class="w-1/3 font-sans">Image: </label>
-			<input type="file" required bind:files={newSignPayload.image} class="w-2/3 font-sans" />
+			<input
+				type="file"
+				required
+				name="image"
+				bind:files={newSignPayload.image}
+				class="form-control w-2/3 font-sans hover:cursor-pointer"
+			/>
 		</div>
 
 		<div class="input-field flex w-full pt-3">
 			<label for="sign-video" class="w-1/3 font-sans">Video: </label>
-			<input type="file" required bind:files={newSignPayload.video} class="w-2/3 font-sans" />
+			<input
+				type="file"
+				required
+				name="video"
+				bind:files={newSignPayload.video}
+				class="form-control w-2/3 font-sans hover:cursor-pointer"
+			/>
 		</div>
 
 		<div class="input-field flex w-full pt-3">
 			<label for="sign-audio" class="w-1/3 font-sans">Audio: </label>
-			<input type="file" required bind:files={newSignPayload.audio} class="w-2/3 font-sans" />
+			<input
+				type="file"
+				required
+				name="audio"
+				bind:files={newSignPayload.audio}
+				class="form-control w-2/3 font-sans hover:cursor-pointer"
+			/>
 		</div>
 
-		<button on:click|preventDefault={handleFileUpload} class="variant-ghost btn mt-6 font-sans"
-			>Upload</button
-		>
-
+		<button type="submit" class="variant-ghost btn mt-6 font-sans"> Upload </button>
 		{#if isCreating}
 			<div class="flex w-full flex-wrap justify-around pt-10">
 				<BarLoader color="rgb(70 133 175)" />
